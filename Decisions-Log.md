@@ -17,4 +17,11 @@ Clean record of finalized decisions only. Updated by Claude as decisions are con
 
 ---
 
+## Week 1 — March 9, 2026
+
+| Date | Decision | Rationale | Owner |
+|------|----------|-----------|-------|
+| Mar 9 | Portrait video fix = two separate tracks: (1) backend dimension fix, (2) card layout redesign | Dimension fix gets to "works as designed"; TikTok-style layout is a separate design + eng pass | David / Richard |
+| Mar 9 | Card layout redesign needs a blessed design before eng work begins | Richard confirmed he can implement once design is ready — no eng work starts without it | David (design spike w/ Shawn) |
+
 <!-- New decisions get added below as they're made, grouped by week -->
