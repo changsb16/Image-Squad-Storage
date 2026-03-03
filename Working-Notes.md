@@ -8,14 +8,18 @@ Paste Teams chat snippets or summaries here → Claude will parse and organize.
 ## Week 1 — March 9, 2026
 
 ### Portrait Video Rendering
-**Root cause confirmed:** Backend returns `videoWidth` and `videoHeight` as `null` for `SharePointVideoLink` media type. Portrait rendering code path exists and works — it just never gets hit because there's no dimension data. Richard hard-coded dimensions locally and confirmed it renders correctly when the data is present.
+**Root cause confirmed (Richard + Joshua):** Backend returns `videoWidth` and `videoHeight` as `null` for `SharePointVideoLink` media type. Portrait rendering code path exists and works — it just never gets hit because there's no dimension data. Richard hard-coded dimensions locally and confirmed it renders correctly when the data is present.
 
-**Two separate tracks identified:**
-- **Track 1 (backend fix):** Get the backend to return correct dimension info → portrait rendering works as designed with minimal black border. Richard owns this once there's a clear path.
-- **Track 2 (card layout redesign):** David wants to go further — adaptive TikTok-style card layout for portrait videos, not just the dimension bug fix. This needs a design pass first. Richard confirmed he can implement once there's a blessed design.
+**Systemic scope (Joshua):** This affects ALL SharePointVideoLinks (URL shares). VideoFile uploads (direct uploads) correctly return dimensions. Root cause is in the Filelink service — dimensions are fetched from Graph but dropped during serialization.
+
+**Fix approach:** Joshua is investigating. Backfill is likely feasible — lazy-backfill on render when dimensions are null using the current user's AAD token, then update the record. Complication: Filelink needs an AAD token to do the Graph fetch.
+
+**Two separate tracks:**
+- **Track 1 (backend fix):** Joshua owns the Filelink serialization fix + backfill. Richard to follow up on timeline.
+- **Track 2 (card layout redesign):** David wants adaptive TikTok-style card layout beyond the fix. Needs a blessed design first — David + Shawn to spike.
 
 **Open questions:**
-- Who owns the backend dimension fix and what's the timeline?
+- Backfill approach confirmed feasible? Joshua still investigating.
 - What does the TikTok-style card design actually look like? David + Shawn to spike.
 
 ---
@@ -26,13 +30,57 @@ Miriam has a private deploy live with mobile changes per the markdown spec. Subo
 ---
 
 ### Image Collage — Test Image Set
-Peng asked whether there's a gold set of test images for collage algorithm evaluation. David has a local folder of real Engage photos he's been using manually. Peng flagged [PhotoCollage](https://github.com/adrienverge/PhotoCollage) — a well-known open source Python package for image collaging — as a potential tool, noting it could likely be ported to another language.
+**Status:** A shared test image set is now taking shape.
+- David has a local folder of real Engage photos (infographics, text, group photos, animals). Will define the "gold standard" criteria and create a shared folder for the crew.
+- Peng downloaded ~100 images of varied dimensions and categories from free image services using Claude Code; uploaded 170 images to a shared SharePoint folder (link in Teams chat).
+- Subodh: Android test community has layout test images but faces are rare. **Faces are important** for validating cropping and centering.
+- Peng: Can also generate test images using AI tools if needed.
+- Peng flagged [PhotoCollage](https://github.com/adrienverge/PhotoCollage) as a reference Python package for collage algorithms; likely portable to another language.
+- Subodh's agent already implemented face detection (Google Face Detection ML library) from David's spec — before/after recording shared in chat.
 
-**Leaning toward:** Using David's existing local photo set as the baseline; evaluate PhotoCollage or similar as part of the collage algorithm spike.
+**Leaning toward:** Shared folder with diverse images (varied dimensions, quality, and categories including faces). Gold standard criteria to be defined by David.
 
 **Open questions:**
-- David's message got cut off — he was describing his local photo folder. What was the rest? *(finish sharing this in the next chat paste)*
 - Is PhotoCollage worth evaluating vs. building our own? Peng to assess.
+- Where is the canonical shared test image folder? Peng's SharePoint folder for now?
+
+---
+
+### Competitor Intelligence — Reverse Engineering Approach
+Peng flagged a technique: dump a website and ask Claude to generate a system design from it (LinkedIn post example used Netflix). Proposed applying this to Facebook and Instagram to understand their media layout and card design approaches.
+
+**Leaning toward:** Start with LinkedIn and Facebook (David confirmed these are good targets).
+
+---
+
+### Image Collage — Text / Infographic Images
+David (in conversation with Brendan): Images with text (infographics) should be treated differently — no level of cropping works well for them. Cropping chops off text.
+
+**Options considered:**
+- Resize instead of crop for text images
+- Classify images at index time in indi8 to identify text-heavy images and handle differently
+
+**Leaning toward:** Resize rather than crop for text images. May still upset some customers but better than chopping. Peng noted indi8 classification is possible.
+
+**Open questions:**
+- What does "resize" look like in the layout? Does it break the grid?
+- Is indi8 classification realistic within the 7-week scope?
+
+---
+
+### Image Collage — Hero Image Selection
+**Current state (confirmed):** Hero image = first image, on both iOS and Android. No way to change it on either platform currently.
+
+**Desired state:** Let users select the hero image — already a listed work stream. On mobile, the native interaction (drag/reorder) would be the UX pattern to aim for.
+
+**Open question (Subodh):** Should hero selection be ephemeral (per session) or persistent and consistent across platforms?
+
+---
+
+### Image Collage — Duplicate Images Bug
+Peng found: multiple copies of the same image can be added easily. Likely unintended behavior.
+
+**Status:** Flagged, not yet assigned.
 
 ---
 

@@ -23,5 +23,9 @@ Clean record of finalized decisions only. Updated by Claude as decisions are con
 |------|----------|-----------|-------|
 | Mar 9 | Portrait video fix = two separate tracks: (1) backend dimension fix, (2) card layout redesign | Dimension fix gets to "works as designed"; TikTok-style layout is a separate design + eng pass | David / Richard |
 | Mar 9 | Card layout redesign needs a blessed design before eng work begins | Richard confirmed he can implement once design is ready — no eng work starts without it | David (design spike w/ Shawn) |
+| Mar 9 | Joshua owns the SharePointVideoLink dimension fix in Filelink service | Root cause confirmed: dimensions fetched from Graph but dropped during serialization; systemic across all URL-shared videos | Joshua |
+| Mar 9 | LinkedIn and Facebook are the first targets for competitor intelligence reverse engineering | David confirmed; approach: dump site → ask Claude to generate system design, apply to media card layout | Peng |
+| Mar 9 | Text/infographic images treated differently — resize instead of crop | Cropping chops text; resizing is imperfect but less destructive; classify at indi8 index time to identify text-heavy images | David / Peng |
+| Mar 9 | Test image set to be standardized in a shared folder | Need diversity: varied dimensions, quality, categories, and faces for cropping validation; Peng seeded with 170 images | David (defines gold standard criteria) |
 
 <!-- New decisions get added below as they're made, grouped by week -->
