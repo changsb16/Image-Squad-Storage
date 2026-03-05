@@ -84,6 +84,77 @@ Peng found: multiple copies of the same image can be added easily. Likely uninte
 
 ---
 
+---
+
+## FHL Week — March 4, 2026
+
+### Image Collage — +N Overflow Count
+Team aligned on how to count the overflow number shown on the last greyed slot in the collage preview.
+
+**Two approaches considered:**
+- **Accurate count (Approach A):** Greyed image is "shown" — e.g., 7 images in 4-slot collage → `+3`
+- **Inflated count (Approach B):** Greyed image is "hidden" — same scenario → `+4` (Facebook's approach)
+
+David confirmed: modeling after LinkedIn, which uses accurate counts. Meerim noted it's a two-way door — can revisit with engagement data if needed.
+
+**Decided:** Accurate count. Greyed image is treated as shown, not hidden. Mobile already updated to match.
+
+---
+
+### Image Collage — Face Detection Placement
+Discussion on where face detection logic should live.
+
+- **Client-side for centering:** Subodh confirmed face centering must happen client-side because aspect ratios depend on the device
+- **Backend for identity:** That would be backend — but we're doing centering only, not identification; identity recognition is out of scope
+- **APK size:** Face detection increases Android APK size by ~2% — acceptable for Engage, but Teams integration needs consideration (Subodh)
+
+**Leaning toward / decided:** Ship current implementation (center-alignment without face detection) first, behind a flight. Layer face detection as a separate experiment later.
+
+**Open questions:**
+- Does Teams integration have APK size constraints that would affect face detection?
+
+---
+
+### Image Collage — Face Detection on Web
+Web today uses center-alignment with existing rules. No face recognition mechanism exists on web.
+
+- Peng flagged lightweight JS options: **face-api.js** and other browser-based face detectors
+- Meerim raised concern: third-party libraries inside Microsoft require an OSS approval process (register the library, go through compliance + security checks per Peng)
+- Current plan: align web and mobile behavior first; web face detection is a potential follow-on step
+
+**Open questions:**
+- Is face-api.js approvable through Microsoft's OSS process? Peng to assess if this becomes a next step.
+- What specifically needs to change on web to align with mobile center-alignment behavior?
+
+---
+
+### Portrait Video — Lazy Backfill Update
+Joshua confirmed acceptable performance for the lazy backfill approach:
+- Latency: ~1s p99 — happens once per video, then the record is updated
+- David: no need to backfill old/ancient videos — only on-demand when dimensions are null
+
+---
+
+### Customer Feedback Timing
+David: can't wait weeks for customer feedback on image collage. Need early signal.
+
+**Plan (Meerim confirmed feasible):**
+1. Show customers the current center-crop prototype first (no face detection)
+2. Show face-aware version as a follow-on once that experiment is ready
+
+**Open question:** David to identify specific customers willing to test early (non-EU only per Sandra's compliance reminder).
+
+---
+
+### Image Collage — Text/Infographic Classification
+Peng: classification could help identify text-heavy images, but screenshots and logos complicate things.
+
+**David's call:** Don't over-engineer this yet. Collect real customer examples of problematic text/infographic images first before committing to a classification approach.
+
+**Status:** Gathering customer examples is the next step before any implementation decision.
+
+---
+
 <!-- TEMPLATE FOR EACH ENTRY:
 ### [Date]
 **Exploring / Considering:**
