@@ -5,6 +5,90 @@ Paste Teams chat snippets or summaries here → Claude will parse and organize.
 
 ---
 
+## Week of March 10, 2026
+
+### Media Immersive View — Shawn's Prototype
+
+**What Shawn built:** Used Claude Code to find the media-first post immersive component and apply it universally to all post types. Any image click now opens a side-panel with: image preview + carousel + thread content + comments + reactions. Confirmed working locally.
+
+**Key details:**
+- Carousel navigation added for multi-image posts (the media-first post didn't have this; Shawn added it as an overlay on the image)
+- Download button added for single-image view (it was inconsistently absent for single images)
+- Comments shown are **thread-level**, not image-specific — consistent with how Facebook handles this; users will understand context from the thread content
+- Carousel is not yet keyboard-accessible — Shawn continuing to prompt Claude for the fix
+- Download button downloads only the currently-viewed image, not all images at once
+
+**Branch:** `shawndeng/feat/media-immersive-view`
+```
+git fetch origin
+git checkout shawndeng/feat/media-immersive-view
+npm run start:web
+```
+
+**Handoff plan:** Miriam or Richard to review and productionize. David + Shawn continue in parallel on the media post flow redesign.
+
+**Open questions:**
+- Carousel keyboard navigation still needs work — Shawn prompting Claude
+- Does the carousel aspect ratio need adjustment? (currently overlay on image, not perfect)
+
+---
+
+### Media Post Flow — Unified Experience Question
+
+The success of Media Immersive View raises a bigger design question: if all image previews now look the same, why maintain a separate "media-first" vs "inline" post flow?
+
+**Current state:** Publisher forces users to choose image position (above/below) — this is friction with unclear benefit.
+
+**Shawn's take:** If all previews look the same regardless of position, why fork at all? Pick the best default.
+
+**David's lean:** Default to top (better engagement signal from media team perspective), but let users reposition if they want. Don't block them in the publisher.
+
+**Data:** David has a dashboard for Media First post usage — usage is low and likely accidental; mostly power users. Will share with Shawn. Dashboard: https://yammer.scuba.io/board/b1458
+
+**Next step:** David + Shawn to sync (possibly tomorrow morning) to review data and prototype the unified flow (Figma or in-code prototype TBD).
+
+---
+
+### Portrait Video — One Player Track Update
+
+**Joshua's status:** Dimension fix mostly in, but `head` and `width` still return null for first user on first feed load. Needs to work for every load, not just subsequent loads.
+
+**After fix:** Team will need a formal chat with One Player team to expose aspect ratio control. Precedent: Albert previously made code changes in One Player codebase with their permission and review — same model applies here.
+
+**Open questions:**
+- Timeline for Joshua's "every load" fix?
+- Who sets up the One Player team conversation?
+
+---
+
+### Experiment Strategy — April Goals
+
+David's summary for broader team / async stakeholders:
+
+1. **Image collage (center crop)** — Miriam + Subodh work → behind a flight → ship to Engage dogfood or MSIT → scorecard running
+2. **Smart cropping** — separate flight/experiment on top of Miriam's current work
+3. **Portrait video** — separate track (Joshua's fix + One Player conversation)
+4. **Media Immersive View** — scorecard experiment to measure engagement difference
+5. **Media post flow redesign** — David + Shawn spike in parallel; complexity TBD
+
+**Experiment coordination concern:** Running many experiments simultaneously. May need DS involvement (Peng or external DS) to ensure they're not confounded.
+
+**Experiment structure confirmed:**
+- Separate experiments: web vs mobile for image collage
+- Separate experiments: Miriam's center-cropping vs Peng's smart-cropping
+- Subodh created iOS and Android experiments; cross-platform rollout is hard with new ECS
+
+---
+
+### Image Collage — Engineering Progress
+
+- **Subodh:** PR #265283 up — "Adaptive image carousel layout with ML Kit face-aware smart cropping"
+- **Meerim:** Integrated David's prototype; PR in review with Core UI
+- **Peng:** Built a Google Photos-style bin packing demo (no ML yet) — works well. Tested posting to Engage; also indexed android, iOS, yammer-clients, and search repos with Claude Code for a multi-repo summary (solid output, no hallucinations, surfaced mobile has more logic)
+- **Meerim asked Subodh:** Reuse the same image collage experiment or create separate ones? → David's answer: separate (web vs mobile, center-crop vs smart-crop)
+
+---
+
 ## Week 1 — March 9, 2026
 
 ### Portrait Video Rendering

@@ -40,4 +40,19 @@ Clean record of finalized decisions only. Updated by Claude as decisions are con
 | Mar 4 | Lazy backfill for video dimensions — no need to backfill old/ancient videos | ~1s p99 latency is acceptable; only triggers once per video | Joshua |
 | Mar 4 | Collect real customer examples of problematic text/infographic images before building any classification | Screenshots and logos complicate classification; gather evidence before committing | David |
 
+---
+
+## Week of March 10, 2026
+
+| Date | Decision | Rationale | Owner |
+|------|----------|-----------|-------|
+| Mar 10 | Feature named "Media Immersive View" — side-panel with image + thread content + comments + reactions | Shawn's name; "immersive" reflects the enriched experience (comments/reactions), not just full-screen | Shawn |
+| Mar 10 | Shawn's prototype to be handed off to Miriam / Richard via branch `shawndeng/feat/media-immersive-view` | Proof of concept is done; front-end engineers can review and productionize in parallel | David |
+| Mar 10 | Media Immersive View goes behind an experiment scorecard to measure engagement impact | All media changes need measurement; need to run experiments simultaneously and may need DS support | David |
+| Mar 10 | Download restriction (Joe's guidance) applies to files only — image download stays | Joshua clarified: Joe's removal was files-only; images can still be downloaded | Joshua |
+| Mar 10 | Default media position = top in posts; remove mandatory choice from publisher flow | Forcing users to choose image position in the publisher slows them down with no clear benefit; just default to top | David / Shawn |
+| Mar 10 | Separate experiments required: web vs mobile for image collage; center-cropping vs smart-cropping separate | Subodh noted cross-platform rollout is hard with new ECS; experiments must be independently controlled | David / Subodh |
+| Mar 10 | One Player team engagement required to expose aspect ratio control for portrait video | After Joshua's dimension fix ships, need a formal chat with the One Player team; Albert's model (we code with their review) is the approach to follow | Joshua / David |
+| Mar 10 | April targets: (1) collage center-crop to dogfood/MSIT, (2) portrait video track, (3) smart cropping as separate experiment on top of Miriam's work, (4) media post flow redesign | Sequenced to reduce risk and allow parallel progress | David |
+
 <!-- New decisions get added below as they're made, grouped by week -->
