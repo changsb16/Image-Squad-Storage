@@ -40,10 +40,24 @@ This crew is a pilot to rethink that entire handoff:
 
 ## What Success Looks Like
 
-### Product Outcomes (7-week cycle)
-- Ship image collage layout fixes, portrait video rendering, media post flow redesign, and image gallery viewer with thread context
-- Reach **MSIT** by end of the 7-week cycle *(to confirm: validate feasibility of MSIT timeline with Anushka and eng given experiment flag setup, accessibility, and T&P review requirements)*
-- Measurable improvement in media post engagement post-launch
+### 3.5-Week Goals (by ~March 27)
+
+| Goal | Detail |
+|------|--------|
+| Image collage (center crop) behind flights — web + mobile | Meerim's web PR and Subodh's mobile PR merged behind experiment flags; MSIT scorecard instrumentation set up and ready to run |
+| Portrait video fix behind a flight | Joshua's dimension fix shipped for all load scenarios; experiment flag in place; MSIT scorecard ready |
+| Media Immersive View behind a flight | Shawn's prototype productionized by Meerim / Richard; behind experiment flag; MSIT scorecard ready |
+| Customer feedback collected | Early customer signal gathered ahead of accessibility and TRUST reviews — non-EU customers only per compliance |
+| Accessibility review started | Accessibility assessment initiated on all three shipped experiences; keyboard navigation and screen reader gaps identified and tracked |
+| TRUST review discussions started | Initial TRUST / privacy review conversations underway — not blocked, but started early enough to avoid late-stage surprises |
+
+### 7-Week Goals (by ~April 21)
+
+| Goal | Detail |
+|------|--------|
+| Smart cropping ready for MSIT experimentation | ML-driven focal point / face-aware cropping implemented as a separate experiment layer on top of center-crop baseline; scorecard running at MSIT |
+| Media First Post end-to-end flow prototyped and ready for dogfooding | Unified publisher flow (default image position, no mandatory choice) prototyped and validated; ready for Engage dogfood or MSIT-level testing |
+| Engagement signal from all three 3.5-week experiments | Image collage, portrait video, and Media Immersive View scorecards have initial data; directional read on engagement impact |
 
 ### Process Outcomes (learnings to share with the org)
 - A documented, reusable markdown-first handoff format that engineers and AI agents can act on directly
