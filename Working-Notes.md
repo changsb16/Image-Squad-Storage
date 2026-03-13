@@ -5,6 +5,96 @@ Paste Teams chat snippets or summaries here → Claude will parse and organize.
 
 ---
 
+## Week of March 12, 2026
+
+### Media Immersive View — Richard's Alignment
+
+Richard confirmed understanding of the scope before going out sick:
+- Shawn's prototype adds a carousel to Media Immersive View (currently only available on Media Posts)
+- Goal: productionize carousel behind a flight
+- Goal: extend Media Immersive View to all post types (including Articles) behind a flight
+
+Next step: David + Shawn to deliver the MD spec for carousel + immersive view to Richard before implementation begins.
+
+---
+
+### Portrait Video — New Issue: Storyline VideoFile Attachments
+
+**Joshua's finding:** While testing the SharePointVideoLink backfill fix, he discovered that Storyline VideoFile attachments (files uploaded directly from device) also don't use portrait rendering — even though `videoHeight` / `videoWidth` are correctly returned for these. This is a separate issue from the SharePointVideoLink null-dimensions bug.
+
+**Open questions:**
+- Is portrait rendering intentionally unsupported for Storyline VideoFile attachments?
+- Do we plan to change rendering in the publisher? (Dimensions aren't available in publisher currently — may be intentional due to latency.)
+- Joshua to share creds/link with Richard for test tenant repro.
+
+---
+
+### Image Collage — V1 Flighting Status
+
+- **Meerim:** V1 image collage is not yet available generally in MSIT. Working flow is available via private deploy — Meerim generating a new private deploy link for Subodh to show Android team.
+- **Meerim confirmed:** V1 is developed exactly per MD spec and designs — nothing changed from last private deploy tests.
+- **Subodh:** Needs to socialize image collage work with broader iOS and Android teams. David pointed to [Problem-Statement.md](Problem-Statement.md) as the 1-paragraph customer problem reference.
+
+---
+
+### Image Collage — V2 Planning (Face Detection + Dynamic Aspect Ratios)
+
+**Peng's POC results:**
+- V2 works much better. Some face cropping still visible, but acceptable — avoids weird stretching.
+- Face detection latency: ~50–300ms. Not perfect; doesn't detect animal faces.
+- If zero head cropping is the goal, slot aspect ratios need to be relaxed.
+
+**Meerim's concern:** Engage has many photos with multiple faces — must work well across those cases for Engage parity.
+
+**Mobile face detection performance (Subodh):**
+- iOS (Vision framework): zero binary size increase (system framework), sub-ms latency per request
+- Android (ML Kit): ~0.5MB APK increase, 300–600ms on first detection (model download), 50–150ms subsequent — users likely won't notice
+
+**Next step:** Peng to start a separate branch for V2 image collage. Will need cross-training and help from Meerim and Subodh.
+
+---
+
+### Image Collage — Overflow Count + Layout Spec
+
+**Peng's question:** How many images should be visibly shown before the +# overflow slot?
+
+**David's answer:**
+- Web: hero image + 3 secondary images; last slot greyed with +# overlay
+- Mobile: hero + 2 secondaries (one fewer than web)
+
+**Subodh's ask:** Capture this formally in the spec. (To do.)
+
+---
+
+### CoreUI Component Question
+
+**Shawn's question:** What's the correct CoreUI component to use for the immersive view?
+
+**Meerim:** Needs investigation — many CoreUI components exist. Shawn checked Storybook; Claude used what was shown but there may be multiple candidates. Meerim to investigate after image collage lands.
+
+**Meerim's guidance:** For media post flow, Shawn can prototype separately with David. After image collage ships, Meerim can help integrate.
+
+---
+
+### David + Peng Sync — Notes
+
+Key items surfaced:
+- **WYSIWYG in publisher:** Preserve it when attaching images — users expect to see what will be published.
+- **Publisher/editing testing:** Need deeper testing from Meerim + Shawn.
+- **New workstream:** Platform parity (Android / iOS / Web) added explicitly.
+- **User-selectable hero image:** Explore as a future work item.
+- **DS support:** Request data science involvement for upcoming A/B tests to avoid experiment confounding.
+
+---
+
+### Privacy Review — ML Enhancements
+
+Peng flagged that ML enhancements (face detection) may require engagement with the Viva Engage privacy team. David agreed: engage early, not as a last-minute gate.
+
+Possible prep needed before next Tuesday — check with Peng on what's required.
+
+---
+
 ## Week of March 10, 2026
 
 ### Media Immersive View — Shawn's Prototype

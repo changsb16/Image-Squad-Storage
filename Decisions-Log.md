@@ -55,4 +55,18 @@ Clean record of finalized decisions only. Updated by Claude as decisions are con
 | Mar 10 | One Player team engagement required to expose aspect ratio control for portrait video | After Joshua's dimension fix ships, need a formal chat with the One Player team; Albert's model (we code with their review) is the approach to follow | Joshua / David |
 | Mar 10 | April targets: (1) collage center-crop to dogfood/MSIT, (2) portrait video track, (3) smart cropping as separate experiment on top of Miriam's work, (4) media post flow redesign | Sequenced to reduce risk and allow parallel progress | David |
 
+---
+
+## Week of March 12, 2026
+
+| Date | Decision | Rationale | Owner |
+|------|----------|-----------|-------|
+| Mar 12 | Media Immersive View scope confirmed: add carousel to media posts (currently missing), extend immersive view to all post types including Articles — both behind a flight | Richard confirmed alignment; carousel is the new addition, universal immersive view is the extension | Richard / David |
+| Mar 12 | Web image collage layout: hero image + 3 secondary images shown; last secondary greyed with +# overlay | Balances richness and performance; consistent with overflow decision from FHL week | David |
+| Mar 12 | Mobile image collage shows one fewer image than web | Screen real estate difference; mobile = hero + 2 secondaries with +# on last | David |
+| Mar 12 | Preserve WYSIWYG in publisher when attaching images | Users expect to see what will be published; surfaced from David + Peng sync | David |
+| Mar 12 | New workstream added: platform parity (Android / iOS / Web) | Surfaced as explicit gap during Subodh's socialization with mobile teams | David |
+| Mar 12 | Privacy review to be engaged early for ML enhancements (face detection) | Peng flagged the need; David agreed — not a last-minute gate | David / Peng |
+| Mar 12 | DS support to be requested for upcoming A/B tests | Running multiple simultaneous experiments risks confounding; need DS involvement | David |
+
 <!-- New decisions get added below as they're made, grouped by week -->
